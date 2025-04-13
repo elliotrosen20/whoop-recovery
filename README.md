@@ -103,7 +103,7 @@ The XGBoost model performed well on the test data with an **R² score of 0.9097*
 A feature importance plot is included below, which highlights which features contribute the most to the predictions. The most important features are related to **sleep duration** and **efficiency metrics**, which make sense considering the nature of the recovery score.
 
 **Feature Importance Plot:**  
-*plot goes here, I guess*
+![Top 5 Feature Importance](feature_importance_top5.png)
 
 ### Metrics on the Test Set:
 
