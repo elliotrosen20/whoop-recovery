@@ -4,7 +4,7 @@ import xgboost as xgb
 import joblib
 
 # Load your trained XGBoost model
-model = joblib.load("xgb.joblib")
+model = joblib.load("xgb_model.joblib")
 
 # Define the prediction function
 def predict(
