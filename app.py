@@ -3,16 +3,13 @@ import pandas as pd
 import xgboost as xgb
 import joblib
 
-# Load your trained XGBoost model
 model = joblib.load("xgboost_model_personal.joblib")
 
-# Define the prediction function
 def predict(
     rhr, hrv, temp, spo2, resp,
     asleep, in_bed, light, deep, rem, awake,
     sleep_need, sleep_debt
 ):
-    # Derived features
     sleep_efficiency = (asleep / in_bed) * 100 if in_bed else 0
     sleep_performance = ((sleep_need - sleep_debt) / sleep_need) * 100 if sleep_need else 0
     light_ratio = light / asleep if asleep else 0
@@ -57,7 +54,6 @@ def predict(
     pred = model.predict(df)[0]
     return round(pred, 2)
 
-# Build the UI
 inputs = [
     gr.Slider(30, 100, label="Resting heart rate (bpm)"),
     gr.Slider(10, 200, label="Heart rate variability (ms)"),
@@ -80,7 +76,7 @@ app = gr.Interface(
     fn=predict,
     inputs=inputs,
     outputs=output,
-    title="WHOOP Recovery Score Estimator",
+    title="WHOOP Recovery Score Predictor",
     description="Adjust the sliders to simulate different biometric states and estimate recovery score.",
 )
 
