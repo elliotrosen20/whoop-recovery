@@ -13,7 +13,7 @@ short_description: Predicts recovery score based on biometric data from WHOOP
 
 ## Whoop Recovery Prediction
 
-This tool predicts a user's WHOOP recovery score using biometric data such as heart rate, respiratory rate, and sleep metrics. It’s based on an XGBoost model trained on real data and serves as a demonstration of how biometric signals can be used to infer recovery readiness.
+This tool predicts a user's WHOOP recovery score using biometric data such as heart rate, respiratory rate, and sleep metrics. It is based on an XGBoost model trained on real data and serves as a demonstration of how biometric signals can be used to infer recovery readiness.
 
 ## Live Demo
 
@@ -56,7 +56,7 @@ For this project, I also created a Neural Network (NN) model that predicts the W
 
 ### 5. Training
 - A learning rate finder is used to determine an optimal learning rate for training.
-- The model is trained for 35 epochs with a learning rate of **0.02** using the `fit_one_cycle` method.
+- The model is trained for a maximum of 35 epochs with a learning rate of **0.02** using the `fit_one_cycle` method.
 
 ### 6. Evaluation
 - After training, the model’s performance is evaluated on the test set using various metrics:
@@ -65,7 +65,7 @@ For this project, I also created a Neural Network (NN) model that predicts the W
   - **R²** (Coefficient of Determination)
 - The trained model is saved as a `.pkl` file for future use.
 
-### 7. Results
+### 7. Test Set Results
 - The neural network model achieved strong test set performance, with **RMSE**, **MAE**, and **R²** metrics indicating high accuracy.
 #### Test Set Performance
 - **RMSE**: 6.6193  
@@ -76,7 +76,7 @@ The neural network model, like the XGBoost model, can predict the WHOOP recovery
 
 ## XGBoost Model
 
-In this project, I used an **XGBoost** model to predict the recovery score from the physiological data. The dataset was preprocessed by handling missing values, creating ratios for different sleep stages, and filtering out irrelevant columns. The model is trained with a **5-fold cross-validation** approach with early stopping to avoid overfitting.
+The model I ultimately deployed to predict recovery scores was an **XGBoost** model. The dataset was preprocessed in the same way as the NN. The model is trained with a **5-fold cross-validation** approach with early stopping to avoid overfitting.
 
 ### Model Details
 - **Model Type**: XGBoost Regressor
@@ -100,16 +100,10 @@ The XGBoost model performed well on the test data with an **R² score of 0.9097*
 
 ### Feature Importance
 
-A feature importance plot is included below, which highlights which features contribute the most to the predictions. The most important features are related to **sleep duration** and **efficiency metrics**, which make sense considering the nature of the recovery score.
+A feature importance plot is included below, which highlights which features contribute the most to the predictions. HRV clearly emerges as a dominant predictor among the features, which aligns with my own experience as a WHOOP user - I've consistently noticed a strong connection between my HRV and daily recovery scores.
 
 **Feature Importance Plot:**  
 ![Top 5 Feature Importance](feature_importance_top5.png)
-
-### Metrics on the Test Set:
-
-- RMSE: 6.62
-- MAE: 5.37
-- R²: 0.91
 
 ## Local Setup
 
