@@ -40,7 +40,20 @@ def predict(
         "REM sleep ratio": rem_ratio
     }
 
+    expected_features = [
+      'Resting heart rate (bpm)', 'Heart rate variability (ms)',
+      'Skin temp (celsius)', 'Blood oxygen %', 'Sleep performance %',
+      'Respiratory rate (rpm)', 'Asleep duration (min)',
+      'In bed duration (min)', 'Light sleep duration (min)',
+      'Deep (SWS) duration (min)', 'REM duration (min)',
+      'Awake duration (min)', 'Sleep need (min)', 'Sleep debt (min)',
+      'Sleep efficiency %', 'Deep sleep ratio', 'REM sleep ratio',
+      'Light sleep ratio'
+    ]
+
     df = pd.DataFrame([data])
+    df = df[expected_features]
+    
     pred = model.predict(df)[0]
     return round(pred, 2)
 
