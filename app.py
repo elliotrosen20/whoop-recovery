@@ -4,7 +4,7 @@ import xgboost as xgb
 import joblib
 
 # Load your trained XGBoost model
-model = joblib.load("xgb_model.joblib")
+model = joblib.load("xgboost_model_personal.joblib")
 
 # Define the prediction function
 def predict(
@@ -53,7 +53,7 @@ def predict(
 
     df = pd.DataFrame([data])
     df = df[expected_features]
-    
+
     pred = model.predict(df)[0]
     return round(pred, 2)
 
