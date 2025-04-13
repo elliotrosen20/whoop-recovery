@@ -19,6 +19,19 @@ This tool predicts a user's WHOOP recovery score using biometric data such as he
 
 You can interact with the model via the [Hugging Face Space](https://huggingface.co/spaces/elliotrosen/whoop-recovery) by adjusting sliders for key input features and instantly seeing the predicted score.
 
+## Project Overview
+
+Two different models were trained and evaluated for predicting WHOOP recovery scores:
+
+- A **neural network** built with FastAI, using tabular data preprocessing and custom architecture.
+- An **XGBoost regression model**, trained with K-Fold cross-validation and early stopping, which ultimately showed stronger performance.
+
+📌 **The deployed model in this app is the XGBoost version**, based on its higher accuracy and consistency across folds and the test set.
+
+The final deployment was built with **Gradio and Python**, allowing for an interactive interface hosted via Hugging Face Spaces.
+
+Both model training notebooks (`nn_model.ipynb` and `xgboost_model.ipynb`) are included in the repo for transparency and reproducibility. They include data preprocessing, feature engineering, and model evaluation.
+
 ## Neural Net Model
 
 For this project, I also created a Neural Network (NN) model that predicts the WHOOP recovery score using biometric data. Here’s an overview of how the model is built:
@@ -63,23 +76,40 @@ The neural network model, like the XGBoost model, can predict the WHOOP recovery
 
 ## XGBoost Model
 
+In this project, I used an **XGBoost** model to predict the recovery score from the physiological data. The dataset was preprocessed by handling missing values, creating ratios for different sleep stages, and filtering out irrelevant columns. The model is trained with a **5-fold cross-validation** approach with early stopping to avoid overfitting.
 
+### Model Details
+- **Model Type**: XGBoost Regressor
+- **Hyperparameters**:
+  - Learning rate: 0.025  
+  - Max depth: 4  
+  - Subsample: 0.9  
+  - Colsample by tree: 0.9  
+  - Early stopping rounds: 25  
 
-## Project Details
+### Performance Metrics (5-Fold Cross Validation)
+- **Avg R²**: 0.9046 ± 0.0175  
+- **Avg RMSE**: 7.02 ± 0.53  
 
-- Built with: Python, XGBoost, Gradio
-- Training approach: 20% test split on a single user’s WHOOP dataset
-- Evaluation: K-fold cross-validation on the training set
+### Test Set Performance
+- **Test RMSE**: 6.6193  
+- **Test MAE**: 5.3738  
+- **Test R²**: 0.9097  
+
+The XGBoost model performed well on the test data with an **R² score of 0.9097**, indicating that the model explains **90.97%** of the variance in the recovery score. The **RMSE** (Root Mean Squared Error) is **6.6193**, which means the model’s predictions are generally close to the actual values.
+
+### Feature Importance
+
+A feature importance plot is included below, which highlights which features contribute the most to the predictions. The most important features are related to **sleep duration** and **efficiency metrics**, which make sense considering the nature of the recovery score.
+
+**Feature Importance Plot:**  
+*plot goes here, I guess*
 
 ### Metrics on the Test Set:
 
 - RMSE: 6.62
 - MAE: 5.37
 - R²: 0.91
-
-## Notebooks
-
-Notebooks demonstrating the training process and model experimentation are available on [Kaggle](#) (add link here). They include data preprocessing, feature engineering, and model evaluation.
 
 ## Local Setup
 
